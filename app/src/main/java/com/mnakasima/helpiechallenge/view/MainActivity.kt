@@ -1,7 +1,8 @@
-package com.mnakasima.helpiechallenge
+package com.mnakasima.helpiechallenge.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mnakasima.helpiechallenge.R
 
 class MainActivity : AppCompatActivity() {
 
