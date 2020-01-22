@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/app_navigation"
+    app:startDestination="@id/userFragment">
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.mnakasima.helpiechallenge.view.UserFragment"
+        android:label="UserFragment" >
+        <action
+            android:id="@+id/actionPostFragment"
+            app:destination="@id/postFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.mnakasima.helpiechallenge.view.PostFragment"
+        android:label="PostFragment" >
+        <action
+            android:id="@+id/actionUserFragment"
+            app:destination="@id/userFragment" />
+    </fragment>
+</navigation>
