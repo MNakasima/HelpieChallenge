@@ -2,22 +2,44 @@ package com.mnakasima.helpiechallenge.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mnakasima.helpiechallenge.model.ApiService
 import com.mnakasima.helpiechallenge.model.User
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class UserViewModel: ViewModel(){
+
+    private val usersService = ApiService()
+    private val disposable = CompositeDisposable()
 
     val users = MutableLiveData<List<User>>()
 
     fun refresh(){
 
-        val user1 = User("1","Marco","blabla@blabla","Home","SP")
-        val user2 = User("2","Hideki","bla@blabla","MyTrace","SCS")
-        val user3 = User("3","Fred","blabla@bla","ACI","SP")
+        disposable.add(
+            usersService.getUsers()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object: DisposableSingleObserver<List<User>>() {
 
-        val userList = arrayListOf<User>(user1,user2,user3)
+                    override fun onSuccess(userList: List<User>) {
+                        users.value = userList
+                    }
 
-        users.value = userList
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                    }
+
+                })
+        )
+
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
+    }
 
 }

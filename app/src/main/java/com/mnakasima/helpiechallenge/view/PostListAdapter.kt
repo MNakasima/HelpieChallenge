@@ -26,7 +26,7 @@ class PostListAdapter(val postsList: ArrayList<Post>):RecyclerView.Adapter<PostL
 
     override fun getItemCount() = postsList.size
 
-    override fun onBindViewHolder(holder: PostListAdapter.PostViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         holder.view.title.text = postsList[position].postTitle
         holder.view.text.text = postsList[position].postText
     }

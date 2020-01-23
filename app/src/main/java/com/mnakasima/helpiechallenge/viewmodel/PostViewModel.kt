@@ -2,20 +2,44 @@ package com.mnakasima.helpiechallenge.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.mnakasima.helpiechallenge.model.ApiService
 import com.mnakasima.helpiechallenge.model.Post
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.observers.DisposableSingleObserver
+import io.reactivex.schedulers.Schedulers
 
 class PostViewModel: ViewModel(){
+
+    private val postsService = ApiService()
+    private val disposable = CompositeDisposable()
 
     val posts = MutableLiveData<List<Post>>()
 
     fun refresh(){
 
-        val post1 = Post("1","sunt aut facere repellat provident occaecati excepturi optio reprehenderit","quia et suscipitnsuscipit recusandae consequuntur expedita et cumnreprehenderit molestiae ut ut quas totamnnostrum rerum est autem sunt rem eveniet architecto")
-        val post2 = Post("2","qui est esse","est rerum tempore vitaensequi sint nihil reprehenderit dolor beatae ea dolores nequenfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendisnqui aperiam non debitis possimus qui neque nisi nulla")
+        disposable.add(
+            postsService.getPosts()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object: DisposableSingleObserver<List<Post>>() {
 
-        val postList = arrayListOf<Post>(post1,post2)
+                    override fun onSuccess(postList: List<Post>) {
+                        posts.value = postList
+                    }
 
-        posts.value = postList
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                    }
+
+                })
+        )
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable.clear()
     }
 
 

@@ -1,7 +1,12 @@
 package com.mnakasima.helpiechallenge.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Post(
-    val postId:String?,
+
+    @SerializedName("title")
     val postTitle:String?,
+
+    @SerializedName("body")
     val postText:String?
 )

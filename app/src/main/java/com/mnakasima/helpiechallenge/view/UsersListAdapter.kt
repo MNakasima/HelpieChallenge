@@ -3,7 +3,6 @@ package com.mnakasima.helpiechallenge.view
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.ListFragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.mnakasima.helpiechallenge.R
@@ -32,8 +31,8 @@ class UsersListAdapter(val usersList: ArrayList<User>):RecyclerView.Adapter<User
         holder.view.userid.text = usersList[position].userId
         holder.view.name.text = usersList[position].userName
         holder.view.email.text = usersList[position].userEmail
-        holder.view.company.text = usersList[position].userCompany
-        holder.view.city.text = usersList[position].userCity
+        holder.view.company.text = usersList[position].userCompany.toString()
+        holder.view.city.text = usersList[position].userCity.toString()
 
         holder.view.setOnClickListener{
             Navigation.findNavController(it).navigate(UserFragmentDirections.actionPostFragment())
