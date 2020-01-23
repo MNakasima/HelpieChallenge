@@ -20,8 +20,8 @@ class ApiService {
         return api.getUsers()
     }
 
-    fun getPosts(): Single<List<Post>> {
-        return api.getPosts()
+    fun getPosts(id: Int): Single<List<Post>> {
+        return api.getPosts(id)
     }
 
 }
