@@ -8,6 +8,7 @@ import com.mnakasima.helpiechallenge.R
 import com.mnakasima.helpiechallenge.model.Post
 import kotlinx.android.synthetic.main.item_post.view.*
 
+
 class PostListAdapter(val postsList: ArrayList<Post>):RecyclerView.Adapter<PostListAdapter.PostViewHolder>(){
 
     fun updatePostList(newPostsList: List<Post>){
@@ -27,6 +28,7 @@ class PostListAdapter(val postsList: ArrayList<Post>):RecyclerView.Adapter<PostL
     override fun getItemCount() = postsList.size
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+
         holder.view.title.text = postsList[position].postTitle
         holder.view.text.text = postsList[position].postText
     }

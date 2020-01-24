@@ -9,7 +9,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-
 class UserViewModel: ViewModel(){
 
     private val usersService = ApiService()
