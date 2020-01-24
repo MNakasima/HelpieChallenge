@@ -19,7 +19,8 @@ class PostViewModel: ViewModel(){
     fun refresh(){
 
         disposable.add(
-            postsService.getPosts(2)
+
+            postsService.getPosts("1")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<List<Post>>() {
